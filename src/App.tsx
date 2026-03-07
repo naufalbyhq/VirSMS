@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 import { cn } from './lib/utils';
 import { getBalance, getNumber, getStatus, setStatus, getPrices, type ServicePrice } from './lib/api';
-import { formatPhoneNumber } from './lib/format';
+import { formatPhoneNumber, stripCountryCode } from './lib/format';
 import { SERVICES } from './constants/services';
 import { COUNTRIES } from './constants/countries';
 import { getCountryFlag } from './constants/countryFlags';
@@ -767,11 +767,11 @@ export default function App() {
                                     </div>
                                   </div>
                                   <div className="flex items-center justify-between gap-4 bg-white/5 p-3 rounded-xl border border-white/5">
-                                    <div className="text-xl sm:text-2xl font-mono font-bold text-white tracking-tighter">
+                                    <div className="text-xl sm:text-2xl font-mono font-bold text-white tracking-tighter select-text cursor-text">
                                       {formatPhoneNumber(activeNumber.number, activeNumber.country)}
                                     </div>
                                     <button
-                                      onClick={() => handleCopy(formatPhoneNumber(activeNumber.number, activeNumber.country), `num_${activeNumber.activationId}`)}
+                                      onClick={() => handleCopy(stripCountryCode(activeNumber.number, activeNumber.country), `num_${activeNumber.activationId}`)}
                                       className="p-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all active:scale-95 border border-white/10 hover:border-white/30"
                                       title="Copy number"
                                     >
