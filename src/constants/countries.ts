@@ -30,7 +30,7 @@ export const COUNTRIES: Country[] = [
   },
   {
     "id": 39,
-    "name": "Argentinas"
+    "name": "Argentina"
   },
   {
     "id": 148,
@@ -502,7 +502,7 @@ export const COUNTRIES: Country[] = [
   },
   {
     "id": 138,
-    "name": "Nambia"
+    "name": "Namibia"
   },
   {
     "id": 81,
@@ -554,7 +554,7 @@ export const COUNTRIES: Country[] = [
   },
   {
     "id": 79,
-    "name": "Papua new gvineya"
+    "name": "Papua New Guinea"
   },
   {
     "id": 87,
