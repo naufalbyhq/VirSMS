@@ -13,3 +13,16 @@ export function formatPhoneNumber(number: string, countryName: string): string {
   
   return `+${cleanNumber}`;
 }
+
+export function stripCountryCode(number: string, countryName: string): string {
+  if (!number) return '';
+
+  const cleanNumber = number.replace(/[\s+]/g, '');
+  const countryCode = COUNTRY_CODES[countryName];
+
+  if (countryCode && cleanNumber.startsWith(countryCode)) {
+    return cleanNumber.slice(countryCode.length);
+  }
+
+  return cleanNumber;
+}
