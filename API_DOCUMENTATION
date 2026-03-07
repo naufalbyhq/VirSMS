@@ -1,0 +1,216 @@
+GET BALANCE :
+https://api.tiger-sms.com/stubs/handler_api.php?api_key=nHaqzd3jiVHmAze5fdJpJ8gkKqWQCvmy&action=getBalance
+
+Get phone number :
+https://api.tiger-sms.com/stubs/handler_api.php?api_key=nHaqzd3jiVHmAze5fdJpJ8gkKqWQCvmy&action=getNumber&service=$service&country=$country&ref=$ref
+
+Get SMS code :
+https://api.tiger-sms.com/stubs/handler_api.php?api_key=nHaqzd3jiVHmAze5fdJpJ8gkKqWQCvmy&action=getStatus&id=$id
+
+Change of activation status :
+https://api.tiger-sms.com/stubs/handler_api.php?api_key=nHaqzd3jiVHmAze5fdJpJ8gkKqWQCvmy&action=setStatus&status=$status&id=$id
+
+Get prices :
+https://api.tiger-sms.com/stubs/handler_api.php?api_key=nHaqzd3jiVHmAze5fdJpJ8gkKqWQCvmy&action=getPrices&service=$service&country=$country
+
+Get providers list :
+https://api.tiger-sms.com/stubs/handler_api.php?api_key=nHaqzd3jiVHmAze5fdJpJ8gkKqWQCvmy&action=getProviders&service=$service&country=$country
+
+Afghanistan – 74
+Albania – 155
+Algeria – 58
+Angola – 76
+Anguilla – 181
+Antigua and Barbuda – 169
+Argentinas – 39
+Armenia – 148
+Aruba – 179
+Australia – 175
+Austria – 50
+Azerbaijan – 35
+Bahamas – 122
+Bahrain – 145
+Bangladesh – 60
+Barbados – 118
+Belarus – 51
+Belgium – 82
+Belize – 124
+Benin – 120
+Bermuda – 195
+Bhutan – 158
+Bolivia – 92
+Bosnia and Herzegovina – 108
+Botswana – 123
+Brazil – 73
+Brunei Darussalam – 121
+Bulgaria – 83
+Burkina Faso – 152
+Burundi – 119
+Cambodia – 24
+Cameroon – 41
+Canada – 36
+Cape Verde – 186
+Cayman islands – 170
+Central African Republic – 125
+Chad – 42
+Chile – 151
+Colombia – 33
+Comoros – 133
+Congo – 150
+Congo (Dem. Republic) – 18
+Costa Rica – 93
+Cote d'Ivoire/Ivory Coast – 27
+Croatia – 45
+Cuba – 113
+Cyprus – 77
+Czech Republic – 63
+Denmark – 172
+Djibouti – 168
+Dominica – 126
+Dominican Republic – 109
+Ecuador – 105
+Egypt – 21
+El Salvador – 101
+Equatorial Guinea – 167
+Eritrea – 176
+Estonia – 34
+Ethiopia – 71
+Fiji – 189
+Finland – 163
+France – 78
+French Guiana – 162
+Gabon – 154
+Gambia – 28
+Georgia – 128
+Germany – 43
+Ghana – 38
+Gibraltar – 201
+Greece – 129
+Grenada – 127
+Guadeloupe – 160
+Guatemala – 94
+Guinea – 68
+Guinea-Bissau – 130
+Guyana – 131
+Haiti – 26
+Honduras – 88
+Hong Kong – 14
+Hungary – 84
+Iceland – 132
+India – 22
+Indonesia – 6
+Iran – 57
+Iraq – 47
+Ireland – 23
+Israel – 13
+Italy – 86
+Jamaica – 103
+Japan – 182
+Jordan – 116
+Kazakhstan – 2
+Kenya – 8
+Korea – 190
+Kosovo – 203
+Kuwait – 100
+Kyrgyzstan – 11
+Lao People's – 25
+Latvia – 49
+Lebanon – 153
+Lesotho – 136
+Liberia – 135
+Libya – 102
+Lithuania – 44
+Luxembourg – 165
+Macau – 20
+Macedonia – 183
+Madagascar – 17
+Malawi – 137
+Malaysia – 7
+Maldives – 159
+Mali – 69
+Malta – 199
+Mauritania – 114
+Mauritius – 157
+Mexico – 54
+Moldova, Republic of – 85
+Monaco – 144
+Mongolia – 72
+Montenegro – 171
+Montserrat – 180
+Morocco – 37
+Mozambique – 80
+Myanmar – 5
+Nambia – 138
+Nepal – 81
+Netherlands – 48
+New Caledonia – 185
+New Zealand – 67
+Nicaragua – 90
+Niger – 139
+Nigeria – 19
+Norway – 174
+Oman – 107
+Pakistan – 66
+Palestine – 188
+Panama – 112
+Papua new gvineya – 79
+Paraguay – 87
+Peru – 65
+Philippines – 4
+Poland – 15
+Portugal – 117
+Puerto Rico – 97
+Qatar – 111
+Reunion – 146
+Romania – 32
+Rwanda – 140
+Saint Kitts and Nevis – 134
+Saint Lucia – 164
+Saint Vincent – 166
+Samoa – 198
+Sao Tome and Principe – 178
+Saudi Arabia – 53
+Senegal – 61
+Serbia – 29
+Seychelles – 184
+Sierra Leone – 115
+Singapore – 196
+Slovakia – 141
+Slovenia – 59
+Solomon Islands – 193
+Somalia – 149
+South Africa – 31
+South Sudan – 177
+Spain – 56
+Sri Lanka – 64
+Sudan – 98
+Suriname – 142
+Swaziland – 106
+Sweden – 46
+Switzerland – 173
+Syrian Arab Republic – 110
+Taiwan – 55
+Tajikistan – 143
+Tanzania – 9
+Thailand – 52
+Timor-Leste – 91
+Togo – 99
+Tonga – 197
+Trinidad and Tobago – 104
+Tunisia – 89
+Turkey – 62
+Turkmenistan – 161
+Uganda – 75
+Ukraine – 1
+United Arab Emirates – 95
+United Kingdom – 16
+United States – 187
+United States VIP – 1001
+United States virt – 12
+Uruguay – 156
+Uzbekistan – 40
+Venezuela – 70
+Viet nam – 10
+Yemen – 30
+Zambia – 147
+Zimbabwe – 96
