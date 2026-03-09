@@ -3,7 +3,6 @@ import {
   History,
   LayoutDashboard,
   Zap,
-  Activity,
   AlertCircle,
   Trash2,
   Download,
@@ -270,86 +269,82 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0e] text-slate-300 font-sans selection:bg-indigo-500/30 flex overflow-hidden relative">
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
-
-      <aside className="w-20 lg:w-72 border-r border-white/5 bg-black/20 backdrop-blur-2xl flex-col hidden md:flex relative z-20 transition-all duration-300">
-        <div className="h-20 flex items-center justify-center lg:justify-start lg:px-8 border-b border-white/5">
-          <div className="flex items-center gap-3 text-white font-bold text-2xl tracking-tighter">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.4)]">
-              <Zap className="w-5 h-5 text-white fill-white/20" />
+    <div className="min-h-screen bg-zinc-950 text-zinc-400 font-sans selection:bg-zinc-800 flex overflow-hidden relative">
+      <aside className="w-20 lg:w-64 border-r border-zinc-800 bg-zinc-950 flex-col hidden md:flex relative z-20 transition-all duration-300">
+        <div className="h-16 flex items-center justify-center lg:justify-start lg:px-6 border-b border-zinc-800">
+          <div className="flex items-center gap-3 text-zinc-100 font-semibold text-lg tracking-tight">
+            <div className="w-8 h-8 rounded-md bg-zinc-100 flex items-center justify-center">
+              <Zap className="w-4 h-4 text-zinc-950 fill-zinc-950" />
             </div>
-            <span className="hidden lg:block bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">VirSMS</span>
+            <span className="hidden lg:block">VirSMS</span>
           </div>
         </div>
 
-        <nav className="flex-1 py-8 px-4 space-y-2">
+        <nav className="flex-1 py-6 px-3 space-y-1">
           <button
             onClick={() => setPage('dashboard')}
             className={cn(
-              "w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-medium transition-all group",
+              "w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
               page === 'dashboard'
-                ? "bg-white/5 text-white border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]"
-                : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+                ? "bg-zinc-800 text-zinc-100"
+                : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"
             )}
           >
-            <LayoutDashboard className={cn("w-5 h-5 group-hover:scale-110 transition-transform", page === 'dashboard' ? "text-indigo-400" : "")} />
+            <LayoutDashboard className="w-4 h-4" />
             <span className="hidden lg:block">Dashboard</span>
           </button>
           <button
             onClick={() => setPage('history')}
             className={cn(
-              "w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-medium transition-all group",
+              "w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
               page === 'history'
-                ? "bg-white/5 text-white border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]"
-                : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+                ? "bg-zinc-800 text-zinc-100"
+                : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50"
             )}
           >
-            <History className={cn("w-5 h-5 group-hover:scale-110 transition-all", page === 'history' ? "text-blue-400" : "group-hover:text-blue-400")} />
+            <History className="w-4 h-4" />
             <span className="hidden lg:block">History</span>
             {history.length > 0 && (
-              <span className="hidden lg:block ml-auto text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/20 px-2 py-0.5 rounded-full">
+              <span className="hidden lg:block ml-auto text-[10px] font-medium bg-zinc-800 text-zinc-300 px-1.5 py-0.5 rounded-sm">
                 {history.length}
               </span>
             )}
           </button>
         </nav>
 
-        <div className="p-4 lg:p-6 border-t border-white/5">
+        <div className="p-4 border-t border-zinc-800">
           <BalanceBadge balance={balance} isRefreshing={isRefreshing} onRefresh={handleRefreshBalance} />
         </div>
       </aside>
 
-      <main className="flex-1 flex flex-col h-screen overflow-hidden relative z-10">
-        <header className="h-20 flex items-center justify-between px-6 lg:px-12 border-b border-white/5 bg-black/10 backdrop-blur-md z-20">
+      <main className="flex-1 flex flex-col h-screen overflow-hidden relative z-10 bg-zinc-950">
+        <header className="h-16 flex items-center justify-between px-6 lg:px-8 border-b border-zinc-800 bg-zinc-950 z-20">
           <div className="flex items-center gap-4">
-            <div className="md:hidden w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.4)]">
-              <Zap className="w-5 h-5 text-white fill-white/20" />
+            <div className="md:hidden w-8 h-8 rounded-md bg-zinc-100 flex items-center justify-center">
+              <Zap className="w-4 h-4 text-zinc-950 fill-zinc-950" />
             </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight hidden sm:block">
+            <h1 className="text-lg font-semibold text-zinc-100 tracking-tight hidden sm:block">
               {page === 'history' ? 'History' : 'Overview'}
             </h1>
           </div>
           <div className="flex items-center gap-4 lg:gap-6">
-            <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-medium text-slate-300">
-              <Activity className="w-4 h-4 text-emerald-400" />
-              <span>System Operational</span>
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-zinc-900 border border-zinc-800 rounded-md text-xs font-medium text-zinc-400">
+              <div className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>Operational</span>
             </div>
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-6 lg:p-12 z-10 custom-scrollbar">
-          <div className="max-w-7xl mx-auto space-y-8 lg:space-y-12">
+        <div className="flex-1 overflow-y-auto p-6 lg:p-8 z-10 custom-scrollbar">
+          <div className="max-w-6xl mx-auto space-y-8">
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-center gap-3 text-red-400 animate-in fade-in slide-in-from-top-4">
-                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+              <div className="bg-red-500/10 border border-red-500/20 rounded-md p-3 flex items-center gap-3 text-red-400 animate-in fade-in slide-in-from-top-4">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <p className="text-sm font-medium">{error}</p>
                 <button 
                   onClick={() => setError(null)} 
-                  className="ml-auto p-1 hover:bg-red-500/20 rounded-lg transition-colors"
+                  className="ml-auto p-1 hover:bg-red-500/20 rounded-md transition-colors"
                   aria-label="Close error"
                 >
                   <XCircle className="w-4 h-4" />
@@ -358,44 +353,41 @@ export default function App() {
             )}
 
             {page === 'history' ? (
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-3xl blur-xl" />
-                <div className="relative bg-[#111118]/80 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl overflow-hidden">
-                  <div className="p-6 lg:p-8 border-b border-white/5 flex items-center justify-between bg-black/20">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-white/5 rounded-2xl text-slate-300 border border-white/10">
-                        <History className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h2 className="text-xl font-bold text-white tracking-tight">All Activity</h2>
-                        <p className="text-sm text-slate-400 mt-1">{history.length} total record{history.length !== 1 ? 's' : ''}</p>
-                      </div>
+              <div className="bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+                <div className="p-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-zinc-800 rounded-md text-zinc-300 border border-zinc-700">
+                      <History className="w-4 h-4" />
                     </div>
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => exportHistoryCSV(history)}
-                        disabled={history.length === 0}
-                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-indigo-500/10 border border-white/10 hover:border-indigo-500/20 rounded-xl text-sm font-bold text-white hover:text-indigo-400 transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        <Download className="w-4 h-4" />
-                        Export CSV
-                      </button>
-                      <button
-                        onClick={clearHistory}
-                        disabled={history.length === 0}
-                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-red-500/10 border border-white/10 hover:border-red-500/20 rounded-xl text-sm font-bold text-white hover:text-red-400 transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                        Clear All
-                      </button>
+                    <div>
+                      <h2 className="text-base font-semibold text-zinc-100 tracking-tight">All Activity</h2>
+                      <p className="text-xs text-zinc-500 mt-0.5">{history.length} total record{history.length !== 1 ? 's' : ''}</p>
                     </div>
                   </div>
-                  <HistoryTable items={history} />
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => exportHistoryCSV(history)}
+                      disabled={history.length === 0}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded-md text-xs font-medium text-zinc-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      Export CSV
+                    </button>
+                    <button
+                      onClick={clearHistory}
+                      disabled={history.length === 0}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 hover:bg-red-500/10 border border-zinc-800 hover:border-red-500/20 rounded-md text-xs font-medium text-zinc-300 hover:text-red-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      Clear All
+                    </button>
+                  </div>
                 </div>
+                <HistoryTable items={history} />
               </div>
             ) : (
-              <div className="space-y-8 lg:space-y-12">
-                <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+              <div className="space-y-8">
+                <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
                   <PurchasePanel
                     services={SERVICES}
                     selectedService={selectedService}
@@ -430,38 +422,35 @@ export default function App() {
                   />
                 </div>
 
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-3xl blur-xl transition-all duration-500 group-hover:bg-white/10" />
-                  <div className="relative bg-[#111118]/80 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl overflow-hidden">
-                    <div className="p-6 lg:p-8 border-b border-white/5 flex items-center justify-between bg-black/20">
-                      <div className="flex items-center gap-4">
-                        <div className="p-3 bg-white/5 rounded-2xl text-slate-300 border border-white/10">
-                          <History className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h2 className="text-xl font-bold text-white tracking-tight">Recent Activity</h2>
-                          <p className="text-sm text-slate-400 mt-1">Your latest purchased numbers</p>
-                        </div>
+                <div className="bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+                  <div className="p-6 border-b border-zinc-800 flex items-center justify-between bg-zinc-900/50">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-zinc-800 rounded-md text-zinc-300 border border-zinc-700">
+                        <History className="w-4 h-4" />
                       </div>
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={() => setPage('history')}
-                          className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold text-white transition-all active:scale-95"
-                        >
-                          View All
-                        </button>
-                        <button
-                          onClick={clearHistory}
-                          disabled={history.length === 0}
-                          className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-red-500/10 border border-white/10 hover:border-red-500/20 rounded-xl text-sm font-bold text-white hover:text-red-400 transition-all active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                          Clear
-                        </button>
+                      <div>
+                        <h2 className="text-base font-semibold text-zinc-100 tracking-tight">Recent Activity</h2>
+                        <p className="text-xs text-zinc-500 mt-0.5">Your latest purchased numbers</p>
                       </div>
                     </div>
-                    <HistoryTable items={history} limit={10} />
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setPage('history')}
+                        className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded-md text-xs font-medium text-zinc-300 transition-colors"
+                      >
+                        View All
+                      </button>
+                      <button
+                        onClick={clearHistory}
+                        disabled={history.length === 0}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900 hover:bg-red-500/10 border border-zinc-800 hover:border-red-500/20 rounded-md text-xs font-medium text-zinc-300 hover:text-red-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        Clear
+                      </button>
+                    </div>
                   </div>
+                  <HistoryTable items={history} limit={10} />
                 </div>
               </div>
             )}

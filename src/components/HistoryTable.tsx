@@ -24,55 +24,55 @@ export function HistoryTable({ items, limit }: HistoryTableProps) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-sm whitespace-nowrap">
-        <thead className="bg-black/40 text-slate-400 text-xs uppercase tracking-wider font-bold">
+        <thead className="bg-zinc-900/50 text-zinc-500 text-xs uppercase tracking-wider font-semibold border-b border-zinc-800">
           <tr>
-            <th className="px-8 py-5">Service</th>
-            <th className="px-8 py-5">Number</th>
-            <th className="px-8 py-5">Date</th>
-            <th className="px-8 py-5">Status</th>
-            <th className="px-8 py-5">Code</th>
+            <th className="px-6 py-4 font-medium">Service</th>
+            <th className="px-6 py-4 font-medium">Number</th>
+            <th className="px-6 py-4 font-medium">Date</th>
+            <th className="px-6 py-4 font-medium">Status</th>
+            <th className="px-6 py-4 font-medium">Code</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-white/5">
+        <tbody className="divide-y divide-zinc-800/50">
           {items.length === 0 ? (
             <tr>
-              <td colSpan={5} className="px-8 py-16 text-center">
-                <div className="flex flex-col items-center gap-3 text-slate-500">
-                  <History className="w-10 h-10 opacity-30" />
-                  <p className="font-medium">No activity yet</p>
+              <td colSpan={5} className="px-6 py-12 text-center">
+                <div className="flex flex-col items-center gap-2 text-zinc-500">
+                  <History className="w-8 h-8 opacity-50 mb-2" />
+                  <p className="font-medium text-sm">No activity yet</p>
                   <p className="text-xs">Purchase a number to see it here</p>
                 </div>
               </td>
             </tr>
           ) : (
             rows.map((item) => (
-              <tr key={item.id} className="hover:bg-white/[0.02] transition-colors">
-                <td className="px-8 py-5">
+              <tr key={item.id} className="hover:bg-zinc-900/30 transition-colors">
+                <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-sm border border-white/10">
+                    <div className="w-8 h-8 rounded-md bg-zinc-900 flex items-center justify-center text-sm border border-zinc-800">
                       {SERVICES.find(s => s.name === item.service)?.icon || '📱'}
                     </div>
                     <div>
-                      <div className="text-white font-bold">{item.service}</div>
-                      <div className="text-xs text-slate-500">{item.country}</div>
+                      <div className="text-zinc-100 font-medium">{item.service}</div>
+                      <div className="text-xs text-zinc-500">{item.country}</div>
                     </div>
                   </div>
                 </td>
-                <td className="px-8 py-5 font-mono text-slate-300 font-medium">
+                <td className="px-6 py-4 font-mono text-zinc-300 text-sm">
                   {formatPhoneNumber(item.number, item.country)}
                 </td>
-                <td className="px-8 py-5 text-slate-400">{item.date}</td>
-                <td className="px-8 py-5">
+                <td className="px-6 py-4 text-zinc-500 text-sm">{item.date}</td>
+                <td className="px-6 py-4">
                   <span className={cn(
-                    'px-3 py-1.5 rounded-lg text-xs font-bold border',
+                    'px-2.5 py-1 rounded-sm text-xs font-medium border',
                     item.status === 'Completed'
-                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                      : 'bg-white/5 text-slate-400 border-white/10'
+                      ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                      : 'bg-zinc-900 text-zinc-400 border-zinc-800'
                   )}>
                     {item.status}
                   </span>
                 </td>
-                <td className="px-8 py-5 font-mono font-bold text-white">{item.code || '—'}</td>
+                <td className="px-6 py-4 font-mono font-medium text-zinc-100">{item.code || '—'}</td>
               </tr>
             ))
           )}

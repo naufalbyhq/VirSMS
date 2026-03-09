@@ -6,6 +6,7 @@ export function usePrices(countryId: number) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     getPrices(countryId)
       .then(setPrices)
