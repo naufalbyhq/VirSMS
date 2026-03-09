@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import {
   History,
   LayoutDashboard,
@@ -16,7 +16,7 @@ import { getCountryFlag } from './constants/countryFlags';
 import { HistoryTable } from './components/HistoryTable';
 import type { HistoryItem } from './components/HistoryTable';
 import { useBalance } from './hooks/useBalance';
-import { usePrices } from './hooks/usePrices';
+import { usePricesByService } from './hooks/usePricesByService';
 import { usePolling } from './hooks/usePolling';
 import { BalanceBadge } from './components/BalanceBadge';
 import { PurchasePanel } from './components/PurchasePanel';
@@ -83,11 +83,11 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [hideOutOfStock, setHideOutOfStock] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [countrySearchQuery, setCountrySearchQuery] = useState('');
+  const [countrySort, setCountrySort] = useState<'quantity' | 'country' | 'price'>('quantity');
 
   const { balance, isRefreshing, refresh: handleRefreshBalance } = useBalance();
-  const { prices, isLoading: loadingPrices } = usePrices(selectedCountry);
+  const { prices, isLoading: loadingPrices } = usePricesByService(selectedService);
 
   const [history, setHistory] = useState<HistoryItem[]>(() => {
     try {
@@ -124,9 +124,16 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  const cancellingRef = useRef<Set<string>>(new Set());
+
   useEffect(() => {
     activeNumbers.forEach(activeNumber => {
-      if (activeNumber.status === 'waiting' && timeRemaining[activeNumber.activationId] === 0) {
+      if (
+        activeNumber.status === 'waiting' &&
+        timeRemaining[activeNumber.activationId] === 0 &&
+        !cancellingRef.current.has(activeNumber.activationId)
+      ) {
+        cancellingRef.current.add(activeNumber.activationId);
         setStatus(activeNumber.activationId, 8)
           .then(() => {
             setActiveNumbers(prev => prev.filter(n => n.activationId !== activeNumber.activationId));
@@ -135,6 +142,9 @@ export default function App() {
           .catch(() => {
             setActiveNumbers(prev => prev.filter(n => n.activationId !== activeNumber.activationId));
             setError('Session timed out.');
+          })
+          .finally(() => {
+            cancellingRef.current.delete(activeNumber.activationId);
           });
       }
     });
@@ -240,22 +250,27 @@ export default function App() {
 
   const sortedFilteredServices = useMemo(() => {
     return SERVICES
-      .filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase()))
-      .filter(s => hideOutOfStock ? (prices[s.id]?.phones ?? 0) > 0 : true)
-      .sort((a, b) => {
-        const aStock = prices[a.id]?.phones ?? -1;
-        const bStock = prices[b.id]?.phones ?? -1;
-        const aIn = aStock > 0 ? 1 : 0;
-        const bIn = bStock > 0 ? 1 : 0;
-        return bIn - aIn;
-      });
-  }, [prices, searchQuery, hideOutOfStock]);
+      .filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  }, [searchQuery]);
 
   const filteredCountries = useMemo(() => {
-    return COUNTRIES.filter(c => 
-      c.name.toLowerCase().includes(countrySearchQuery.toLowerCase())
-    );
-  }, [countrySearchQuery]);
+    return COUNTRIES
+      .filter(c => c.name.toLowerCase().includes(countrySearchQuery.toLowerCase()))
+      .filter(c => hideOutOfStock ? (prices[c.id]?.phones ?? 0) > 0 : true)
+      .sort((a, b) => {
+        if (countrySort === 'quantity') {
+          const aStock = prices[a.id]?.phones ?? 0;
+          const bStock = prices[b.id]?.phones ?? 0;
+          return bStock - aStock;
+        }
+        if (countrySort === 'price') {
+          const aPrice = prices[a.id]?.price ?? Infinity;
+          const bPrice = prices[b.id]?.price ?? Infinity;
+          return aPrice - bPrice;
+        }
+        return a.name.localeCompare(b.name);
+      });
+  }, [countrySearchQuery, hideOutOfStock, prices, countrySort]);
 
   const clearHistory = useCallback(() => {
     if (window.confirm('Clear all history? This cannot be undone.')) {
@@ -403,8 +418,8 @@ export default function App() {
                     onHideOutOfStockChange={setHideOutOfStock}
                     countrySearchQuery={countrySearchQuery}
                     onCountrySearchChange={setCountrySearchQuery}
-                    isCountryDropdownOpen={isCountryDropdownOpen}
-                    setIsCountryDropdownOpen={setIsCountryDropdownOpen}
+                    countrySort={countrySort}
+                    onCountrySortChange={setCountrySort}
                     isPurchasing={isPurchasing}
                     onPurchase={handlePurchase}
                     sortedFilteredServices={sortedFilteredServices}

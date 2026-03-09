@@ -65,6 +65,9 @@ interface TigerServiceInfo {
   count: string | number;
 }
 
+const priceCache = new Map<string, Record<string, ServicePrice>>();
+const inflight = new Map<string, Promise<Record<string, ServicePrice>>>();
+
 export async function getPrices(country: number): Promise<Record<string, ServicePrice>> {
   const qs = new URLSearchParams({ action: 'getPrices', country: String(country) });
   const res = await fetch(`${BASE}?${qs}`);
@@ -87,4 +90,41 @@ export async function getPrices(country: number): Promise<Record<string, Service
   }
 
   return result;
+}
+
+export async function getPricesByService(service: string): Promise<Record<string, ServicePrice>> {
+  const cached = priceCache.get(service);
+  if (cached) return cached;
+
+  if (inflight.has(service)) {
+    return inflight.get(service)!;
+  }
+
+  const qs = new URLSearchParams({ action: 'getPrices', service });
+  const promise = fetch(`${BASE}?${qs}`)
+    .then(async res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json() as Record<string, unknown>;
+      const result: Record<string, ServicePrice> = {};
+      for (const [countryId, info] of Object.entries(json)) {
+        if (info && typeof info === 'object') {
+          const countryData = info as Record<string, unknown>;
+          const serviceInfo = countryData[service] as TigerServiceInfo | undefined;
+          if (serviceInfo) {
+            result[countryId] = {
+              price: Number(serviceInfo.cost || 0) / 95,
+              phones: Number(serviceInfo.count || 0),
+            };
+          }
+        }
+      }
+      priceCache.set(service, result);
+      return result;
+    })
+    .finally(() => {
+      inflight.delete(service);
+    });
+
+  inflight.set(service, promise);
+  return promise;
 }
